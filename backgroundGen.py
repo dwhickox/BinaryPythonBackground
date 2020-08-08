@@ -35,7 +35,7 @@ def makeImg(width, height, binaryfile, imageName):
     if (im.size[0] != im.size[1]):
         print("image not square")
         quit()
-        
+
     denom = im.size[0]
     if (width%denom != 0 or height%denom != 0):
         print("size of image does not evenly go into width or height")
@@ -45,7 +45,7 @@ def makeImg(width, height, binaryfile, imageName):
         binStr += binStr
 
     img = Image.new('RGB', (width, height), color = 'white')
-    #img.putalpha(0)
+    img.putalpha(0)
 
     x = 0
     y = 0
@@ -60,6 +60,7 @@ def makeImgMulti(width, height, binaryfile, zipName):
     imgs = [] #16 image slots
     with open(binaryfile, 'r') as file:
         binStr = file.read().replace('\n', '')
+        print(binStr)
     #extract to a temp path with name of the archive
     path = os.path.dirname(zipName)
     zipFolder = os.path.splitext(zipName)[0]
@@ -104,7 +105,7 @@ def makeImgMulti(width, height, binaryfile, zipName):
         binStr += binStr
 
     img = Image.new('RGB', (width, height), color = 'white')
-    #img.putalpha(0)
+    img.putalpha(0)
     x = 0
     y = 0
     for y in range(0,height,denom):
@@ -119,13 +120,13 @@ def makeImgMulti(width, height, binaryfile, zipName):
                 neighborIndex.append((int(x/denom)+int(y/denom)*int(width/denom))-1) # left
                 neighborIndex.append((int(x/denom)+(int(y/denom)+1)*int(width/denom))) # down
                 #wrap edge cases
-                for i in neighborIndex:
-                    if(i>=len(binStr)):
+                for i in range(4):
+                    if(neighborIndex[i]>=len(binStr)):
                         #too long wrap backwards
-                        i -= len(binStr)
-                    elif(i<0):
+                        neighborIndex[i] -= len(binStr)
+                    elif(neighborIndex[i]<0):
                         #too short, wrap positive
-                        i += len(binStr)
+                        neighborIndex[i] += len(binStr)
 
                 if(binStr[neighborIndex[0]] == '1'):
                     imageVal += 8
