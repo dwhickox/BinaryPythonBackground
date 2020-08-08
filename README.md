@@ -3,11 +3,13 @@
 
 important: !!! due to this project making use of transparancy all source files must be png or zip filled with png
 
- 2 modes: 
- 1. directory search. If the 4th argument is missing the program will automatically search for a "patterns" folder in the pwd, if it is found it will geneate a background for any image tile it finds png or zip. 
+Needs Pillow image library!
+
+2 modes: 
+1. directory search. If the 4th argument is missing the program will automatically search for a "patterns" folder in the pwd, if it is found it will geneate a background for any image tile it finds png or zip. 
     - Ex: python3 backgroundGen.py 2070 1200 binary.txt 
     - this will generate many 2070 px wide, 1200 pix tall images based on the binary string in binary.txt with base tiles based on all the tiles/tile sets found in ./patterns
- 2. single item. if you include a path to a specific image tile png or zip the program will only generate a background with that image
+2. single item. if you include a path to a specific image tile png or zip the program will only generate a background with that image
     - Ex: python3 backgroundGen.py 2070 1200 binary.txt ./patterns/circuit.zip 
     - this will generate an 2070 px wide, 1200 pix tall image based on the binary string in binary.txt with just the circuit.zip file as a set of base tiles. 
 
