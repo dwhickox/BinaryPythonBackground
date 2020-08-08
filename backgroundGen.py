@@ -60,7 +60,7 @@ def makeImgMulti(width, height, binaryfile, zipName):
     imgs = [] #16 image slots
     with open(binaryfile, 'r') as file:
         binStr = file.read().replace('\n', '')
-        print(binStr)
+    
     #extract to a temp path with name of the archive
     path = os.path.dirname(zipName)
     zipFolder = os.path.splitext(zipName)[0]
